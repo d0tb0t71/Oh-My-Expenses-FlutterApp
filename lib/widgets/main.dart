@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:oh_my_expenses/models/transaction.dart';
 import 'package:oh_my_expenses/widgets/transaction_list.dart';
 import 'chart.dart';
@@ -10,7 +11,12 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+    SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'My Expense',
       theme: ThemeData(
         primarySwatch: Colors.deepOrange,
@@ -67,6 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _startAddNewTransaction(BuildContext ctx) {
     showModalBottomSheet(
+        backgroundColor: Colors.transparent,
         context: ctx,
         builder: (_) {
           return GestureDetector(
