@@ -11,12 +11,10 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
     SystemChrome.setSystemUIOverlayStyle(
         SystemUiOverlayStyle(statusBarColor: Colors.transparent));
 
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       title: 'My Expense',
       theme: ThemeData(
         primarySwatch: Colors.deepOrange,
@@ -48,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
     ),*/
   ];
 
-  List< Transaction> get _recentTransactions {
+  List<Transaction> get _recentTransactions {
     return _userTransactions.where((tx) {
       return tx.date.isAfter(
         DateTime.now().subtract(
@@ -58,11 +56,12 @@ class _MyHomePageState extends State<MyHomePage> {
     }).toList();
   }
 
-  void _addNewTransaction(String txTitle, double txAmount) {
+  void _addNewTransaction(
+      String txTitle, double txAmount, DateTime chosenDate) {
     final newTx = Transaction(
       title: txTitle,
       amount: txAmount,
-      date: DateTime.now(),
+      date: chosenDate,
       id: DateTime.now().toString(),
     );
 
@@ -84,6 +83,14 @@ class _MyHomePageState extends State<MyHomePage> {
         });
   }
 
+  void _deleteTransaction(String id) {
+    setState(() {
+      _userTransactions.removeWhere((tx) {
+        return tx.id == id;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -102,17 +109,18 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            //Chart
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          //Chart
 
           Chart(_recentTransactions),
 
-            //User_Input
-            TransactionList(_userTransactions),
-          ],
-        ),
+          //User_Input
+          Expanded(
+              child: TransactionList(_userTransactions, _deleteTransaction)),
+        ],
+      ),
       floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),
           onPressed: () => _startAddNewTransaction(context)),

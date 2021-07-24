@@ -47,7 +47,7 @@ class _ChartState extends State<Chart> {
     print(groupedTransactionValues);
 
     return Card(
-        elevation: 6,
+        elevation: 10,
         margin: EdgeInsets.all(20),
         child: Padding(
           padding: EdgeInsets.all(10),
