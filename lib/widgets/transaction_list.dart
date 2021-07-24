@@ -3,6 +3,7 @@ import 'package:oh_my_expenses/models/transaction.dart';
 import 'package:intl/intl.dart';
 
 class TransactionList extends StatelessWidget {
+
   final List<Transaction> transactions;
 
    TransactionList(this.transactions);
@@ -10,11 +11,10 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height,
+      height: MediaQuery.of(context).size.height*0.8,
       child: transactions.isEmpty
           ? Column(
               children: [
-
                 SizedBox(
                   height: 30,
                 ),

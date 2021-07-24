@@ -94,8 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
               )),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
+      body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -107,7 +106,6 @@ class _MyHomePageState extends State<MyHomePage> {
             TransactionList(_userTransactions),
           ],
         ),
-      ),
       floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),
           onPressed: () => _startAddNewTransaction(context)),
